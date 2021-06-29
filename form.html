@@ -206,6 +206,19 @@
                                         <input type="text" id="status" name="status" value="status"><br>
                                         <label for="tglBayar">Tanggal Pembayaran:</label><br>
                                         <input type="date" id="tglBayar" name="tglBayar" value="tgl"><br>
+
+                                        <label for="Layanan">Layanan:</label><br>
+                                        <input type="text" id="Layanan" name="Layanan" value="Layanan"><br>
+
+                                        <label for="Bandwidth">Bandwidth:</label><br>
+                                        <input type="text" id="Bandwidth" name="Bandwidth" value="Bandwidth"><br>
+
+                                        <label for="Satuan">Satuan:</label><br>
+                                        <input type="text" id="Satuan" name="Satuan" value="Mbps"><br>
+
+                                        <label for="SID">SID:</label><br>
+                                        <input type="text" id="SID" name="SID" value="SID"><br>
+
                                     </form> 
                                     
                                     <button onclick="InsertData()">Insert Data</button>  
@@ -291,7 +304,12 @@
                         let accNum = "" ;
                         let CustName = "" ;
                         let Status = "" ;
-                        let tglBayar = "" ;
+                        let tglBayar = "";
+                        let layanan = "";
+                        let bandwidth = "";
+                        let satuan = "";
+                        let sid = "";
+
                         for(i=0; i < data.length; i++){
                             
                             if(data[i]["gsx$accountnum"]["$t"] == x ){
@@ -299,6 +317,10 @@
                                 CustName = data[i]["gsx$custname"]["$t"];
                                 Status = data[i]["gsx$status"]["$t"];
                                 tglBayar = data[i]["gsx$tglbayar"]["$t"];
+                                layanan = data[i]["gsx$layanan"]["$t"];
+                                bandwidth = data[i]["gsx$bandwidth"]["$t"];
+                                satuan = data[i]["gsx$detail"]["$t"];
+                                sid = data[i]["gsx$sid"]["$t"];
 
 
                                 console.log(CustName);
@@ -306,6 +328,10 @@
                                 document.getElementById("custName").value = CustName;
                                 document.getElementById("status").value = Status;
                                 document.getElementById("tglBayar").value = tglBayar;
+                                document.getElementById("Layanan").value = layanan;
+                                document.getElementById("Bandwidth").value = bandwidth;
+                                document.getElementById("Satuan").value = satuan;
+                                document.getElementById("SID").value = sid;
                             }
 
                             
@@ -329,10 +355,15 @@
             let custName = document.getElementById("custName").value;
             let status = document.getElementById("status").value;
             let tglBayar = document.getElementById("tglBayar").value;
+            let layanan = document.getElementById("Layanan").value;
+            let bandwidth = document.getElementById("Bandwidth").value;
+            let satuan = document.getElementById("Satuan").value;
+            let sid = document.getElementById("SID").value;
+
             let queries = "select*from13671whereACCOUNT NUM=" +accNum;
-            fetch("https://api.apispreadsheets.com/data/13671/", {
+            fetch("https://api.apispreadsheets.com/data/14786/", {
                 method: "POST",
-                body: JSON.stringify({"data": {"STATUS":status,"CUST NAME":custName,"TGL BAYAR":tglBayar}, "query": queries}),
+                body: JSON.stringify({"data": {"STATUS":status,"CUST NAME":custName,"TGL BAYAR":tglBayar,"Layanan":layanan,"Bandwidth":bandwidth,"Detail":satuan,"SID":sid}, "query": queries}),
                 }).then(res =>{
                 if (res.status === 201){
                     // SUCCESS
@@ -351,7 +382,10 @@
             document.getElementById("custName").value = "";
             document.getElementById("status").value = "";
             document.getElementById("tglBayar").value = "";
-
+            document.getElementById("Layanan").value = "";
+            document.getElementById("Bandwidth").value = "";
+            document.getElementById("Satuan").value = "";
+            document.getElementById("SID").value = "";
 
         }
         function InsertData(){
@@ -359,9 +393,13 @@
             let custName = document.getElementById("custName").value;
             let status = document.getElementById("status").value;
             let tglBayar = document.getElementById("tglBayar").value;
-            fetch("https://api.apispreadsheets.com/data/13671/", {
+            let layanan = document.getElementById("Layanan").value;
+            let bandwidth = document.getElementById("Bandwidth").value;
+            let satuan = document.getElementById("Satuan").value;
+            let sid = document.getElementById("SID").value;
+            fetch("https://api.apispreadsheets.com/data/14786/", {
             method: "POST",
-            body: JSON.stringify({"data": {"ACCOUNT NUM":accNum, "CUST NAME":custName, "STATUS":status, "TGL BAYAR":tglBayar}}),
+            body: JSON.stringify({"data": {"STATUS":status,"CUST NAME":custName,"TGL BAYAR":tglBayar,"Layanan":layanan,"Bandwidth":bandwidth,"Detail":satuan,"SID":sid}}),
             }).then(res =>{
                 if (res.status === 201){
                     // SUCCESS
