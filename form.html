@@ -306,6 +306,22 @@
 	<script src="assets/js/demo.js"></script>
     <script src="https://kit.fontawesome.com/0f74922640.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        function Notify(msg){
+            $(document).ready(function(){
+
+            demo.initChartist();
+
+            $.notify({
+                icon: 'pe-7s-gift',
+                message: msg
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+            });
+        }
         function myFunction() {
             var x = document.getElementById("accNum").value;
                 let xmlhttp = new XMLHttpRequest();
@@ -377,17 +393,20 @@
             let queries = "select*from13671whereACCOUNT NUM=" +accNum;
             fetch("https://api.apispreadsheets.com/data/14786/", {
                 method: "POST",
-                body: JSON.stringify({"data": {"STATUS":status,"CUST NAME":custName,"TGL BAYAR":tglBayar,"Layanan":layanan,"Bandwidth":bandwidth,"Detail":satuan,"SID":sid}, "query": queries}),
+                body: JSON.stringify({"data": {"STATUS":status,"CUST NAME":custName,"TGL BAYAR":tglBayar}, "query": queries}),
                 }).then(res =>{
                 if (res.status === 201){
                     // SUCCESS
-                    console.log("wesbener")
-                    alert("berhasil untuk mengubah data")
+                    // console.log("wesbener")
+                    let info ="Berhasil untuk Mengubah Data"
+                    Notify(info)
                 }
                 else{
                     // ERROR
-                    alert("terjadi kesalahan mengubah data")
-                    console.log("rung bener");
+                    // alert("terjadi kesalahan mengubah data")
+                    // console.log("rung bener");
+                    let info = "Terjadi Kesalahan Mengubah Data"
+                    Notify(info)
                 }
             })
         }
@@ -418,7 +437,8 @@
                 if (res.status === 201){
                     // SUCCESS
                     console.log("wes bener")
-                    alert("berhasil untuk memasukkan data")
+                    let info = "berhasil untuk memasukkan data"
+                    Notify(info)
                     document.getElementById("accNum").value = "";
                     document.getElementById("custName").value = "";
                     document.getElementById("status").value = "";
@@ -427,7 +447,8 @@
                 else{
                     // ERROR
                     console.log("ono sing salah");
-                    alert("terjadi kesalahan memasukkan data")
+                    let info = "terjadi kesalahan memasukkan data"
+                    Notify(info)
                 }
             })
         }
