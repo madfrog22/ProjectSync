@@ -394,20 +394,21 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
     <script src="https://kit.fontawesome.com/0f74922640.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var OriginalTable = excel.innerHTML;
-    </script>
+    </script> -->
     <script type="text/javascript">
         function myFunction() {
             var x = document.getElementById("searchVal").value;
-              
+            var OriginalTable = excel.innerHTML;
             let xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange= function() {
                 if(this.readyState == 4 && this.status== 200){
                     let data = JSON.parse(this.responseText).feed.entry;
                     let i;
                     //reset tabel
-                    document.getElementById("excel").innerHTML = OriginalTable;
+                    document.getElementById("excel").innerHTML = "";
+                    
                     for(i=0; i < data.length; i++){
                         
                         if(data[i]["gsx$status"]["$t"].includes(x) || data[i]["gsx$accountnum"]["$t"].includes(x) || data[i]["gsx$custname"]["$t"].includes(x)){
@@ -453,6 +454,7 @@
                         }
                         
                     }
+
                 }else{
 
                 }
