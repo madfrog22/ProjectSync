@@ -395,70 +395,76 @@
 	<script src="assets/js/demo.js"></script>
     <script src="https://kit.fontawesome.com/0f74922640.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        var OriginalTable = excel.innerHTML;
+    </script>
+    <script type="text/javascript">
         function myFunction() {
             var x = document.getElementById("searchVal").value;
-                let xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange= function() {
-                    if(this.readyState == 4 && this.status== 200){
-                        let data = JSON.parse(this.responseText).feed.entry;
-                        let i;
-                        // cuman 10 data head
-                        for(i=0; i < data.length; i++){
+              
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange= function() {
+                if(this.readyState == 4 && this.status== 200){
+                    let data = JSON.parse(this.responseText).feed.entry;
+                    let i;
+                    //reset tabel
+                    document.getElementById("excel").innerHTML = OriginalTable;
+                    for(i=0; i < data.length; i++){
+                        
+                        if(data[i]["gsx$status"]["$t"].includes(x) || data[i]["gsx$accountnum"]["$t"].includes(x) || data[i]["gsx$custname"]["$t"].includes(x)){
+                            let accNum = data[i]["gsx$accountnum"]["$t"];
+                            let CustName = data[i]["gsx$custname"]["$t"];
+                            let Status = data[i]["gsx$status"]["$t"];
+                            let tglBayar = data[i]["gsx$tglbayar"]["$t"];
+                            let Layanan = data[i]["gsx$layanan"]["$t"];
+                            let Bandwidth = data[i]["gsx$bandwidth"]["$t"];
+                            let Satuan = data[i]["gsx$detail"]["$t"];
+                            let SID = data[i]["gsx$sid"]["$t"];
                             
-                            if(data[i]["gsx$status"]["$t"].includes(x) || data[i]["gsx$accountnum"]["$t"].includes(x) || data[i]["gsx$custname"]["$t"].includes(x)){
-                                let accNum = data[i]["gsx$accountnum"]["$t"];
-                                let CustName = data[i]["gsx$custname"]["$t"];
-                                let Status = data[i]["gsx$status"]["$t"];
-                                let tglBayar = data[i]["gsx$tglbayar"]["$t"];
-                                let Layanan = data[i]["gsx$layanan"]["$t"];
-                                let Bandwidth = data[i]["gsx$bandwidth"]["$t"];
-                                let Satuan = data[i]["gsx$detail"]["$t"];
-                                let SID = data[i]["gsx$sid"]["$t"];
-                                
+                            
 
 
-                                document.getElementById("excel").innerHTML +=
-                                "<tr>" +
-                                "<td>" +
-                                accNum +
-                                "</td>" +
-                                "<td>" +
-                                CustName + 
-                                "</td>" +
-                                "<td>" +
-                                Status + 
-                                "</td>" +
-                                "<td>" +
-                                tglBayar + 
-                                "</td>" +
-                                "<td>" +
-                                Layanan + 
-                                "</td>" +
-                                "<td>" +
-                                Bandwidth + 
-                                "</td>" +
-                                "<td>" +
-                                Satuan + 
-                                "</td>" +
-                                "<td>" +
-                                SID + 
-                                "</td>" +
-                                "</tr>";
-                            }
-                            
+                            document.getElementById("excel").innerHTML +=
+                            "<tr>" +
+                            "<td>" +
+                            accNum +
+                            "</td>" +
+                            "<td>" +
+                            CustName + 
+                            "</td>" +
+                            "<td>" +
+                            Status + 
+                            "</td>" +
+                            "<td>" +
+                            tglBayar + 
+                            "</td>" +
+                            "<td>" +
+                            Layanan + 
+                            "</td>" +
+                            "<td>" +
+                            Bandwidth + 
+                            "</td>" +
+                            "<td>" +
+                            Satuan + 
+                            "</td>" +
+                            "<td>" +
+                            SID + 
+                            "</td>" +
+                            "</tr>";
                         }
-                    }else{
-
+                        
                     }
+                }else{
 
-                };
-                //link untuk GSheet id/-- urutan nomer sheet mulai dari 1
-                xmlhttp.open(
-                    "GET",
-                    "https://spreadsheets.google.com/feeds/list/1hgx9LagvcoIJOOTkvKuTuw-UjS4-Wcb0W_5oDFxA85w/14/public/values?alt=json",
-                    true
-                );
-                xmlhttp.send();
+                }
+
+            };
+            //link untuk GSheet id/-- urutan nomer sheet mulai dari 1
+            xmlhttp.open(
+                "GET",
+                "https://spreadsheets.google.com/feeds/list/1hgx9LagvcoIJOOTkvKuTuw-UjS4-Wcb0W_5oDFxA85w/14/public/values?alt=json",
+                true
+            );
+            xmlhttp.send();
         }
         
     </script>

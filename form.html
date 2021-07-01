@@ -209,6 +209,19 @@
 
                                         <label for="Layanan">Layanan:</label><br>
                                         <input type="text" id="Layanan" name="Layanan" value="Layanan"><br>
+                                        <!-- <select name="Layanan" id="Layanan">
+                                            <option value="" selected>Pilih Layanan</option>
+                                            <option value="WIRELINE">Wireline</option>
+                                            <option value="HSI">HSI</option>
+                                            <option value="WIFI STATION">Wifi Station</option>
+                                            <option value="WIFI Managed Srvice">WIFI Managed Srvice</option>
+                                            <option value="ASTINET">Astinet</option>
+                                            <option value="ASTINET LITE">ASTINET LITE</option>
+                                            <option value="METRO">Metro</option>
+                                            <option value="METRO-E">METRO-E</option>
+                                            <option value="VPN">VPN</option>
+                                            WIFI Managed Srvice
+                                        </select><br> -->
 
                                         <label for="Bandwidth">Bandwidth:</label><br>
                                         <input type="text" id="Bandwidth" name="Bandwidth" value="Bandwidth"><br>
@@ -343,6 +356,7 @@
 
                 };
                 //link untuk GSheet id/-- urutan nomer sheet mulai dari 1
+                //link ghseet tidak boleh dalam format xlsx
                 xmlhttp.open(
                     "GET",
                     "https://spreadsheets.google.com/feeds/list/1hgx9LagvcoIJOOTkvKuTuw-UjS4-Wcb0W_5oDFxA85w/14/public/values?alt=json",
